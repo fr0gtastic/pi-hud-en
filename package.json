@@ -1,0 +1,21 @@
+{
+  "name": "@epiphanye/pi-hud",
+  "version": "0.1.2",
+  "description": "Rana desktop pet that shows Pi Coding Agent status above your desktop",
+  "keywords": ["pi-package", "pi-extension", "pi", "desktop-pet", "desktop-companion", "hud", "floating-status", "wsl", "windows", "pyside6"],
+  "license": "MIT",
+  "files": ["extensions", "clients", "assets", "README.md", "LICENSE"],
+  "scripts": {
+    "check": "python3 -m py_compile clients/hud_client.py && rm -rf clients/__pycache__",
+    "prepack": "npm run check"
+  },
+  "pi": {
+    "extensions": ["./extensions"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

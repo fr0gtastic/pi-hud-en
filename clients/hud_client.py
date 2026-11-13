@@ -72,11 +72,11 @@ MOVE_RIGHT = Clip("MOVE_RIGHT", 1, 8, 250)
 MOVE_LEFT = Clip("MOVE_LEFT", 2, 8, 250)
 MOVE_VERTICAL = Clip("MOVE_VERTICAL", 4, 5, 250)
 TEXT = {
-    "IDLE": "◌  ( •_• )  空闲待命",
-    "WORKING": "◆  (ง •̀_•́)ง  思考与执行中",
-    "WAITING_APPROVAL": "?  ( •̀_•́ )!  等待用户确认",
-    "COMPLETED": "★  ( ✧◡✧ )  目标达成",
-    "ERROR": "×  ( >_< )!  执行出错",
+    "IDLE": "◌  ( •_• )  Idle",
+    "WORKING": "◆  (ง •̀_•́)ง  Working",
+    "WAITING_APPROVAL": "?  ( •̀_•́ )!  Waiting for approval",
+    "COMPLETED": "★  ( ✧◡✧ )  Goal achieved",
+    "ERROR": "×  ( >_< )!  Error",
 }
 COLORS = {
     "IDLE": "#94a3b8",
@@ -472,33 +472,33 @@ class RanaPet(QWidget):
 
     def contextMenuEvent(self, event) -> None:
         menu = QMenu(self)
-        bubble = QAction("隐藏气泡" if self.bubble_enabled else "显示气泡", menu)
+        bubble = QAction("Hide Bubble" if self.bubble_enabled else "Show Bubble", menu)
         bubble.triggered.connect(self.toggle_bubble)
         menu.addAction(bubble)
         clip = self.clip or IDLE_CLIPS[0]
         info = QAction(
-            f"状态：{self.status}（{clip.name}，第 {clip.row + 1} 行，"
-            f"第 {self.frame + 1}/{clip.frames} 帧，{1000 / clip.interval_ms:.1f} FPS，"
-            f"{int(self.height_px)}px）",
+            f"Status: {self.status} ({clip.name}, Row {clip.row + 1}, "
+            f"Frame {self.frame + 1}/{clip.frames}, {1000 / clip.interval_ms:.1f} FPS, "
+            f"{int(self.height_px)}px)",
             menu,
         )
         info.setEnabled(False)
         menu.addAction(info)
-        size_menu = menu.addMenu("大小")
-        for label, height in (("小", 120), ("默认", 160), ("大", 220)):
+        size_menu = menu.addMenu("Size")
+        for label, height in (("Small", 120), ("Default", 160), ("Large", 220)):
             action = QAction(label, size_menu)
             action.triggered.connect(lambda _checked=False, value=height: self.set_pet_height(value))
             size_menu.addAction(action)
-        reset = QAction("重置大小", size_menu)
+        reset = QAction("Reset Size", size_menu)
         reset.triggered.connect(lambda: self.set_pet_height(SCALE_BASE))
         size_menu.addAction(reset)
-        top = QAction("重新置顶", menu)
+        top = QAction("Re-Pin", menu)
         top.triggered.connect(self.force_topmost)
         menu.addAction(top)
-        hide = QAction("隐藏桌宠", menu)
+        hide = QAction("Hide Desktop Pet", menu)
         hide.triggered.connect(self.hide)
         menu.addAction(hide)
-        quit_action = QAction("退出桌宠", menu)
+        quit_action = QAction("Exit Desktop Pet", menu)
         quit_action.triggered.connect(QApplication.quit)
         menu.addAction(quit_action)
         menu.exec(event.globalPos())
@@ -529,7 +529,7 @@ class RanaPet(QWidget):
         elif self.asset_error:
             painter.setPen(QColor("#fb7185"))
             painter.setFont(self.layout.font)
-            painter.drawText(self.rect(), Qt.AlignCenter, "Rana 素材加载失败\n" + self.asset_error)
+            painter.drawText(self.rect(), Qt.AlignCenter, "Rana failed to load assets\n" + self.asset_error)
 
     def closeEvent(self, event) -> None:
         self.save_config()

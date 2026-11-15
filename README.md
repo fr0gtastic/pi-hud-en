@@ -1,6 +1,8 @@
 > 原文中文 README：[README_CN.md](README_CN.md)
 > 
 > Original Chinese README: [README_CN.md](README_CN.md)
+>
+> This is an English translation fork of the original Chinese project, which can be found on [npmjs.com](https://www.npmjs.com/package/@epiphanye/pi-hud) and [jsdelivr.com](https://www.jsdelivr.com/package/npm/@epiphanye/pi-hud). Only user-facing strings and documentation were translated; no features or code logic were changed.
 
 # @fr0gtastic/pi-hud-en · Rana Desktop Pet
 

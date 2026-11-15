@@ -132,3 +132,7 @@ If that path doesn't exist, set **PI_HUD_PYW** -- the environment variable the e
 export PI_HUD_PYW="/mnt/c/Python312/pythonw.exe"
 pi
 ```
+
+## License
+
+MIT. See [LICENSE](LICENSE).
